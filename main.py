@@ -21,16 +21,16 @@ class Numbers(BaseModel):
 
 @app.post("/add")
 def add(nums: Numbers):
-     logger.info(f"Received add request: {a} + {b}")
+     logger.info(f"Received add request: {nums.a} + {nums.b}")
      return {"result": nums.a + nums.b}
 
 @app.post("/subtract")
 def subtract(nums: Numbers):
-       logger.info(f"Received add request: {a} - {b}")
+       logger.info(f"Received add request: {nums.a} - {nums.b}")
        return {"result": nums.a - nums.b}
 
 @app.post("/divide")
 def divide(nums: Numbers):
-       logger.info(f"Received add request: {a} / {b}")
+       logger.info(f"Received add request: {nums.a} / {nums.b}")
        return {"result": nums.a / nums.b}
 

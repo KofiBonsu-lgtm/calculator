@@ -17,8 +17,8 @@
                body: JSON.stringify({ a, b })
              });
 
-             const data = await response.json();
-                 document.getElementById("result").textContent = data.result ?? data.error ?? "Error";
+                  const data = await response.json();
+                 document.getElementById("result").textContent = data.result;
                }
 
     document.getElementById("add-btn").onclick = () => calculate("add");
