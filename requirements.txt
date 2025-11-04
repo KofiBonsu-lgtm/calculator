@@ -1,1 +1,7 @@
 numpy
+fastapi
+uvicorn
+pydantic
+httpx
+pytest
+pytest-asyncio
