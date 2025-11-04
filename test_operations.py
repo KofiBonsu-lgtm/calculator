@@ -1,7 +1,7 @@
 from Calculator.Addition import addition
 from Calculator.Subtraction import subtraction
 from Calculator.Division import division
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 from main import app
 import pytest
 
@@ -14,7 +14,8 @@ def test_divide():
 
 @pytest.mark.asyncio
 async def test_add_endpoint():
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.get("/add?a=2&b=3")
-    assert response.status_code == 200
-    assert response.json() == {"result": 5}
+ transport = ASGITransport(app=app)
+ async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.get("/add?a=5&b=3")
+ assert response.status_code == 200
+ assert response.json() == {"result": 8}
