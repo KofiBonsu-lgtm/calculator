@@ -6,7 +6,7 @@ import pytest
 def test_add():
     assert addition(2, 3) == 5
 def test_subtract():
-    assert subtraction(5, 3) == 2
+    assert subtraction(3, 5) == 2
 def test_divide():
-    assert division(6, 2) == 3    
+    assert division(2, 6) == 3    
 
