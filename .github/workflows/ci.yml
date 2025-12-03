@@ -4,40 +4,36 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_DB: mydbs
-          POSTGRES_USER: john
-          POSTGRES_PASSWORD: pwd0123456789
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U john -d mydbs"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+  runs-on: ubuntu-latest
+  services:
+    postgres:
+      image: postgres:15
+      env:
+        POSTGRES_DB: mydbs
+        POSTGRES_USER: john
+        POSTGRES_PASSWORD: pwd0123456789
+      ports:
+        - 5432:5432
+      options: >-
+        --health-cmd "pg_isready -U john -d mydbs"
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest pytest-asyncio httpx
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest pytest-asyncio httpx playwright
+        playwright install --with-deps
 
-      - name: Run tests
-        run: pytest -v
-
-      - name: Install Playwright
-        run: |
-          pip install playwright
-          playwright install --with-deps
+    - name: Run tests
+      run: pytest -v
 
   build:
     runs-on: ubuntu-latest
