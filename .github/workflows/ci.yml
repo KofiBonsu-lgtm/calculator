@@ -63,3 +63,4 @@ jobs:
 
       - name: Push Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/fastapi-app:latest
+
